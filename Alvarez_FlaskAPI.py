@@ -3,6 +3,7 @@ from marshmallow import Schema, fields
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
 
+
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:root@localhost:3306/mydb"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -102,6 +103,7 @@ def client_data():
 
     if format_choice == 'json':
         return jsonify(response_data)
+ 
     elif format_choice == 'xml':
         root = ET.Element('client')
         for key, value in response_data.items():
@@ -109,8 +111,10 @@ def client_data():
             child.text = str(value)
         xml_data = ET.tostring(root).decode('utf-8')
         return xml_data, {'Content-Type': 'application/xml'}
+ 
     else:
         return jsonify(response_data)
+
 
 @app.route('/partners', methods=['POST'])
 def partner_data():
