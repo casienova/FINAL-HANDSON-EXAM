@@ -80,5 +80,6 @@ while True:
     if y_n == 'y':
         continue
     else:
+        print("Thank you, for using my program!")
         break
     
